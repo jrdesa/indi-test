@@ -12,8 +12,8 @@ import org.springframework.context.annotation.Configuration;
 @OpenAPIDefinition(
         info = @Info(
                 contact = @Contact(
-                        name = "Juan Ramón Fernández Cebreiro",
-                        email = "ramoncebreiro@gmail.com"),
+                        name = "Juan Ramón FC",
+                        email = "email@gmail.com"),
                 title = "Price Service API",
                 version = "2.0",
                 description = "Test Java Developer - Inditex",
@@ -28,7 +28,7 @@ import org.springframework.context.annotation.Configuration;
         servers = {
                 @Server(
                         description = "Local ENV",
-                        url = "http://localhost:8080"
+                        url = "http://localhost:8081"
                 ),
                 @Server(
                         description = "Prod ENV",

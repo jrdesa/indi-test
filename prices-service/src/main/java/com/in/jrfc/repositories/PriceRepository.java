@@ -10,4 +10,6 @@ import java.util.List;
 public interface PriceRepository extends JpaRepository<Price, Long> {
     List<Price> findByProductIdAndBrandId(Integer productId,
                                           Long brandId);
+
+    List<Price> findAllByProductId(Integer productId);
 }

@@ -55,14 +55,14 @@ public class Price {
     }
 
     public boolean validPriceRange(Date applicationTime) {
-        return applicationDates(applicationTime);
+        return aplicationDates(applicationTime);
     }
 
-    private boolean applicationDates(Date applicationTime) {
+    private boolean aplicationDates(Date applicationTime) {
         return this.startDate.compareTo(applicationTime) <= 0 && this.endDate.compareTo(applicationTime) >= 0;
     }
 
-    public List<LocalDateTime> lookForApplicationDates(Date filterDate) {
+    public List<LocalDateTime> lookForAplicationDates(Date filterDate) {
 
         this.priceMandatoryDays = Collections
                 .unmodifiableList(listPriceMandatoryDays(filterDate));

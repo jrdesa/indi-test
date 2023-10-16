@@ -71,5 +71,25 @@ class PriceRepositoryTest {
 
     @Test
     void deleteInBatch() {
+        price = new Price(1L,
+                Timestamp.valueOf("2021-06-14 00:00:00"),
+                Timestamp.valueOf("2021-12-31 23:59:59"), 50
+                , 35456, 1, BigDecimal.valueOf(60.60)
+                , "EUR");
+
+        priceRepository.save(price);
+        //then
+        List<Price> byProductIdAndBrandId;
+        byProductIdAndBrandId = priceRepository
+                .findByProductIdAndBrandId(35456, 1L);
+
+        Assertions.assertEquals(byProductIdAndBrandId.size(), 1);
+
+        priceRepository.deleteInBatch(byProductIdAndBrandId);
+
+        byProductIdAndBrandId = priceRepository
+                .findByProductIdAndBrandId(35456, 1L);
+
+        Assertions.assertEquals(byProductIdAndBrandId.size(), 0);
     }
 }
