@@ -19,7 +19,7 @@ public class PriceResponseDto {
     private Long brandId;
     private Integer priceList;
     @JsonFormat(pattern = "yyyy-MM-dd' 'HH:mm:ss")
-    private List<LocalDateTime> applicationDates;
+    private List<LocalDateTime> aplicationDates;
     private BigDecimal price;
 
     @Override

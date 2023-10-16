@@ -23,9 +23,9 @@ import java.util.stream.Collectors;
 @Service
 public class PriceService {
     private final static Logger LOGGER = LoggerFactory.getLogger(PriceService.class);
-    @Autowired
-    PriceRepository priceRepository;
 
+    PriceRepository priceRepository;
+    @Autowired
     public PriceService(PriceRepository priceRepository) {
         this.priceRepository = priceRepository;
     }
@@ -57,10 +57,10 @@ public class PriceService {
                         + priceFilterParams.getRequestDate()));
 
         final ObjectMapper mapper = new ObjectMapper();
-        List<LocalDateTime> localDateList = price.lookForApplicationDates(priceFilterParams.getRequestDate());
+        List<LocalDateTime> localDateList = price.lookForAplicationDates(priceFilterParams.getRequestDate());
 
         final PriceResponseDto priceResponseDto = mapper.convertValue(price, PriceResponseDto.class);
-        priceResponseDto.setApplicationDates(localDateList);
+        priceResponseDto.setAplicationDates(localDateList);
 
         return priceResponseDto;
 

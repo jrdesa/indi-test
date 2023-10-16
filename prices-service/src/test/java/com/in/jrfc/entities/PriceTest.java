@@ -97,8 +97,8 @@ class PriceTest {
 
     @Test
     @DisplayName("test_the_remaining_price_application_days_list")
-    void testLookForApplicationDates() {
-        Assertions.assertTrue(this.price1.lookForApplicationDates(dateBetween).size() > 0);
+    void testLookForAplicationDates() {
+        Assertions.assertTrue(this.price1.lookForAplicationDates(dateBetween).size() > 0);
 
     }
 

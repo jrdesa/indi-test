@@ -9,7 +9,6 @@ import java.util.Date;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @EqualsAndHashCode
 @Builder
 public class PriceRequestDto {

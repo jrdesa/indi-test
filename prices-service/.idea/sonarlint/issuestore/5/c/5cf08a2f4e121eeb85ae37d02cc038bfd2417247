@@ -1,0 +1,6 @@
+
+k	java:S1171"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(áäºïýÿÿÿÿ
+[
+java:S1124"EReorder the modifiers to comply with the Java Language Specification.(è·ƒ¿
+@
+java:S1068"*Remove this unused "LOGGER" private field.(è·ƒ¿

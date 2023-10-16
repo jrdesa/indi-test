@@ -1,7 +1,6 @@
 package com.in.jrfc.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.in.jrfc.dtos.PriceRequestDto;
 import com.in.jrfc.dtos.PriceResponseDto;
 import com.in.jrfc.exceptions.PriceNotFoundException;
@@ -12,13 +11,13 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,27 +26,24 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
+@RequiredArgsConstructor
 public class PriceController {
 
-    @Autowired
     private final PriceService priceService;
 
-    @Autowired
-    public PriceController(PriceService priceService) {
-        this.priceService = priceService;
-    }
-
-    @Operation(summary = "filterPrice", description = "Get a priceResponseDto by requestDate productId and brandId")
+    @Operation(summary = "filter product Price", description = "Get a priceResponseDto by requestDate productId and brandId")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK",
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = PriceResponseDto.class))}),
+                    content =
+                            {@Content(mediaType = "application/json",
+                                    schema =
+                                    @Schema(implementation = PriceResponseDto.class))}),
             @ApiResponse(responseCode = "400", description = "Invalid id supplied",
-                    content = @Content),
+                    content = {}),
             @ApiResponse(responseCode = "404", description = "Not found",
-                    content = @Content)})
-    @RequestMapping(method = RequestMethod.GET, value = "/price", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<PriceResponseDto> filterPrice(@RequestParam Map<String, String> filterParams ) throws PriceNotFoundException, PriceRunTimeException, InvalidFormatException {
+                    content = {})})
+    @GetMapping(value = "/price", produces = MediaType.APPLICATION_JSON_VALUE)
+        public ResponseEntity<PriceResponseDto> filterPrice(@RequestParam Map<String, String> filterParams) throws PriceNotFoundException, PriceRunTimeException {
 
         PriceRequestDto priceFilterParams;
         try {
