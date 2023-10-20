@@ -38,7 +38,7 @@ class PriceRepositoryTest {
         //given
 
         price = Price.builder().brandId(1L)
-                .startDate(Timestamp.valueOf("2021-06-14 00:00:00"))
+                .startDate(Timestamp.valueOf("2020-06-15 16:00:00"))
                 .endDate(Timestamp.valueOf("2021-12-31 23:59:59")).priceList(5)
                 .productId(99999).priority(1).price(BigDecimal.valueOf(160.60))
                 .curr("EUR").build();

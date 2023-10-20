@@ -28,7 +28,7 @@ import org.springframework.context.annotation.Configuration;
         servers = {
                 @Server(
                         description = "Local ENV",
-                        url = "http://localhost:8081"
+                        url = "http://localhost:8080"
                 ),
                 @Server(
                         description = "Prod ENV",
@@ -44,7 +44,7 @@ import org.springframework.context.annotation.Configuration;
                 scheme = "basic"
         )
 
-@Configuration
-public class OpenApiConfig {
+    @Configuration
+    public class OpenApiConfig {
 
-}
+    }
