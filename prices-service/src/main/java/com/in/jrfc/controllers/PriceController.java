@@ -12,7 +12,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -23,14 +22,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
-
+//@Builder
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
 public class PriceController {
 
     private final PriceService priceService;
-
     @Operation(summary = "filter product Price", description = "Get a priceResponseDto by requestDate productId and brandId")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK",
@@ -38,24 +36,24 @@ public class PriceController {
                             {@Content(mediaType = "application/json",
                                     schema =
                                     @Schema(implementation = PriceResponseDto.class))}),
-            @ApiResponse(responseCode = "400", description = "Invalid id supplied",
-                    content = {}),
-            @ApiResponse(responseCode = "404", description = "Not found",
-                    content = {})})
+            @ApiResponse(responseCode = "400", description = "Invalid id supplied"),
+
+
+    })
     @GetMapping(value = "/price", produces = MediaType.APPLICATION_JSON_VALUE)
         public ResponseEntity<PriceResponseDto> filterPrice(@RequestParam Map<String, String> filterParams) throws PriceNotFoundException, PriceRunTimeException {
 
-        PriceRequestDto priceFilterParams;
+        final PriceRequestDto priceRequestDto;
         try {
-            priceFilterParams = getPriceRequestDto(filterParams);
+            priceRequestDto = getPriceRequestDto(filterParams);
         } catch (Exception e) {
             throw new PriceRunTimeException(HttpStatus.INTERNAL_SERVER_ERROR, e.getCause().getLocalizedMessage());
         }
-        PriceResponseDto priceResponseDto = priceService.getCurrentPriceByProductIdAndBrandId(priceFilterParams);
+        PriceResponseDto priceResponseDto = priceService.getCurrentPriceByProductIdAndBrandId(priceRequestDto);
         if (priceResponseDto != null) {
             return new ResponseEntity<>(priceResponseDto, HttpStatus.OK);
         } else {
-            throw new PriceNotFoundException();
+            throw new PriceNotFoundException(HttpStatus.NOT_FOUND, "Price not found");
         }
     }
 

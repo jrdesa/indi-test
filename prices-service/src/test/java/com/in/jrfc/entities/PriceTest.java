@@ -39,8 +39,6 @@ class PriceTest {
                 .endDate(Timestamp.valueOf("2020-07-11 23:59:59"))
                 .priceList(1).productId(35455).priority(0)
                 .price(BigDecimal.valueOf(35.50)).curr("EUR").build();
-
-        new Price();
     }
 
     @Test

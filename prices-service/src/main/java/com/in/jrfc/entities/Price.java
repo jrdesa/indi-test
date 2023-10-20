@@ -1,10 +1,14 @@
 package com.in.jrfc.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -12,11 +16,9 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
 @Builder
 @Entity
 public class Price {
@@ -70,12 +72,18 @@ public class Price {
     }
 
     protected List<LocalDateTime> listPriceMandatoryDays(Date filterDate) {
-        final List<LocalDateTime> localDateList = new ArrayList<>();
+        final List<LocalDateTime> priceMandatoryDays = new ArrayList<>();
         if (this.endDate.after(filterDate)) {
-            localDateList.add(LocalDateTime.ofInstant(filterDate.toInstant(), ZoneId.of("UTC")));
+            priceMandatoryDays.add(convertToLocalDateTimeViaMilisecond(filterDate));
         }
-        localDateList.add(LocalDateTime.ofInstant(this.endDate.toInstant(), ZoneId.of("UTC")));
-        return localDateList;
+        priceMandatoryDays.add(convertToLocalDateTimeViaMilisecond(this.endDate));
+        return priceMandatoryDays;
+    }
+
+    protected LocalDateTime convertToLocalDateTimeViaMilisecond(Date dateToConvert) {
+        return Instant.ofEpochMilli(dateToConvert.getTime())
+                .atZone(ZoneId.systemDefault())
+                .toLocalDateTime();
     }
 
 

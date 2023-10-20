@@ -6,6 +6,7 @@ public class PriceRunTimeException extends RuntimeException {
     private static final String DESCRIPTION = "Price Service Exception";
 
     public PriceRunTimeException(HttpStatus runTime, String detail) {
+
         super(DESCRIPTION + ". " + detail);
     }
 
