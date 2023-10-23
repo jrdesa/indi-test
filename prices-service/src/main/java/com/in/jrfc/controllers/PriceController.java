@@ -57,7 +57,7 @@ public class PriceController {
         }
     }
 
-    private PriceRequestDto getPriceRequestDto(Map<String, String> filterParams) throws PriceRunTimeException {
+    protected PriceRequestDto getPriceRequestDto(Map<String, String> filterParams) throws PriceRunTimeException {
         final ObjectMapper mapper = new ObjectMapper();
 
         return mapper.convertValue(filterParams, PriceRequestDto.class);
