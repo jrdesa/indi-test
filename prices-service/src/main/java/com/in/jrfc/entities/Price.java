@@ -74,15 +74,15 @@ public class Price {
     protected List<LocalDateTime> listPriceMandatoryDays(Date filterDate) {
         final List<LocalDateTime> priceMandatoryDays = new ArrayList<>();
         if (this.endDate.after(filterDate)) {
-            priceMandatoryDays.add(convertToLocalDateTimeViaMilisecond(filterDate));
+            priceMandatoryDays.add(convertToLocalDateTimeViaMiliSecond(filterDate));
         }
-        priceMandatoryDays.add(convertToLocalDateTimeViaMilisecond(this.endDate));
+        priceMandatoryDays.add(convertToLocalDateTimeViaMiliSecond(this.endDate));
         return priceMandatoryDays;
     }
 
-    protected LocalDateTime convertToLocalDateTimeViaMilisecond(Date dateToConvert) {
+    protected LocalDateTime convertToLocalDateTimeViaMiliSecond(Date dateToConvert) {
         return Instant.ofEpochMilli(dateToConvert.getTime())
-                .atZone(ZoneId.systemDefault())
+                .atZone(ZoneId.of("UTC"))
                 .toLocalDateTime();
     }
 
